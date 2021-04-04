@@ -22,6 +22,7 @@ env:
   GKE_ZONE: us-central1   # TODO: update to cluster zone
   DEPLOYMENT_NAME: app1 # TODO: update to deployment name
   IMAGE: gcr.io/stacklabs-gsdenys/app1
+  GCLOUD_PROJECT: ${{ secrets.GCP_PROJECT }}
 
 jobs:
   setup-build-publish-deploy:
