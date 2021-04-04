@@ -50,11 +50,6 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
         echo ${{ secrets.GKE_SA_KEY }} | base64 --decode > $GOOGLE_APPLICATION_CREDENTIALS
-    
-    - run: |-
-        echo "::debug::$GOOGLE_APPLICATION_CREDENTIALS"
-    
-    - run: |-
         gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
 #     - uses: google-github-actions/get-gke-credentials@main
 #       with:
