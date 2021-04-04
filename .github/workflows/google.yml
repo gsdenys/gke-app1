@@ -47,6 +47,12 @@ jobs:
     - run: |-
         gcloud --quiet auth configure-docker
 
+    - name: Login to gcloud registry
+      id: gcloud
+      uses: elgohr/gcloud-login-action@master
+      with:
+        account_key: ${{ secrets.GKE_SA_KEY }}
+
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
