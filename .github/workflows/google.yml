@@ -49,7 +49,7 @@ jobs:
 
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        echo ${{ secrets.GKE_SA_KEY }}  > $GOOGLE_APPLICATION_CREDENTIALS
+        echo ${{ secrets.GKE_SA_KEY }} > $GOOGLE_APPLICATION_CREDENTIALS
     
     - run: |-
         echo < $GOOGLE_APPLICATION_CREDENTIALS
