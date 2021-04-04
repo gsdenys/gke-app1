@@ -61,10 +61,9 @@ jobs:
       uses: google-github-actions/get-gke-credentials@main
       with:
         cluster_name: $GKE_CLUSTER
-        location: $GKE_ZONE
+        location: us-central1
         credentials: ${{ secrets.GCP_SA_KEY }}
         
-
     # Build the Docker image
     - name: Build
       run: |-
