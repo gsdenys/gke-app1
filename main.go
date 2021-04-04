@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"text/template"
 
@@ -26,5 +25,5 @@ func main() {
 	r.HandleFunc("/css", css).Methods("GET")
 
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":3000", nil))
+	http.ListenAndServe(":3000", nil)
 }
