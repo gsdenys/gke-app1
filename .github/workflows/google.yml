@@ -60,7 +60,7 @@ jobs:
     - id: get-credentials
       uses: google-github-actions/get-gke-credentials@main
       with:
-        cluster_name: $GKE_CLUSTER
+        cluster_name: kb8s-cluster-infra
         location: us-central1
         credentials: ${{ secrets.GCP_SA_KEY }}
         
