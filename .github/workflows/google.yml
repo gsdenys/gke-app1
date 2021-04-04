@@ -52,7 +52,7 @@ jobs:
         echo ${{ secrets.GKE_SA_KEY }}  > $GOOGLE_APPLICATION_CREDENTIALS
     
     - run: |-
-        cat $GOOGLE_APPLICATION_CREDENTIALS
+        echo < $GOOGLE_APPLICATION_CREDENTIALS
     
     - run: |-
         gcloud auth activate-service-account --key-file "$GOOGLE_APPLICATION_CREDENTIALS"
