@@ -23,6 +23,7 @@ env:
   DEPLOYMENT_NAME: app1 # TODO: update to deployment name
   IMAGE: gcr.io/stacklabs-gsdenys/app1
   GCLOUD_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GOOGLE_APPLICATION_CREDENTIALS: /tmp/gcloud.json
 
 jobs:
   setup-build-publish-deploy:
@@ -48,7 +49,8 @@ jobs:
 
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+        - echo ${{ secrets.GKE_SA_KEY }}  > $GOOGLE_APPLICATION_CREDENTIALS
+        - gcloud auth activate-service-account --key-file "$GOOGLE_APPLICATION_CREDENTIALS"
 #     - uses: google-github-actions/get-gke-credentials@main
 #       with:
 #         credentials: ${{ secrets.GKE_SA_KEY }}
