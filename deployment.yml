@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: app1
-        image: gcr.io/stacklabs-gsdenys/app1
+        image: gcr.io/PROJECT_ID/IMAGE:TAG
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 3000
