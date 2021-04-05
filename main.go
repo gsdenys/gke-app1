@@ -2,18 +2,16 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
 )
 
-func homePage(w http.ResponseWriter, r *http.Request) {
-	html, _ := ioutil.ReadFile("index.html")
-
-	fmt.Fprintf(w, string(html))
-}
+// func homePage(w http.ResponseWriter, r *http.Request) {
+// 	html, _ := ioutil.ReadFile("./index.html")
+// 	fmt.Fprintf(w, string(html))
+// }
 
 func setupRoutes() {
-	http.HandleFunc("/", homePage)
+	http.Handle("/", http.FileServer(http.Dir("./static")))
 }
 
 func main() {
