@@ -13,7 +13,8 @@ FROM scratch
 
 
 COPY --from=builder /go/bin/main /
-COPY --from=builder /static /
+COPY --from=builder /static/index.html /static/index.html
+COPY --from=builder /static/index.css /static/index.css
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 CMD ["/main"]
