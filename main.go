@@ -1,20 +1,29 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
+	"text/template"
+
+	"github.com/gorilla/mux"
 )
 
-func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "C'est l'application 1 - kustomize")
+var templates *template.Template
+
+func html(w http.ResponseWriter, r *http.Request) {
+	templates.ExecuteTemplate(w, "index.html", nil)
 }
 
-func setupRoutes() {
-	http.HandleFunc("/", homePage)
-}
+// func css(w http.ResponseWriter, r *http.Request) {
+// 	templates.ExecuteTemplate(w, "index.css", nil)
+// }
 
 func main() {
-	fmt.Println("Application Web démarrée sur le port 3000")
-	setupRoutes()
+	templates = template.Must(template.ParseGlob("templates/*"))
+	r := mux.NewRouter()
+
+	r.HandleFunc("/", html).Methods("GET")
+	// r.HandleFunc("/css", css).Methods("GET")
+
+	http.Handle("/", r)
 	http.ListenAndServe(":3000", nil)
 }
