@@ -18,7 +18,7 @@ func html(w http.ResponseWriter, r *http.Request) {
 // }
 
 func main() {
-	templates = template.Must(template.ParseGlob("templates/*"))
+	templates = template.Must(template.ParseGlob("./templates/*"))
 	r := mux.NewRouter()
 
 	r.HandleFunc("/", html).Methods("GET")
