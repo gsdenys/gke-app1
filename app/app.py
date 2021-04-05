@@ -17,6 +17,9 @@ app = flask.Flask(__name__)
 def home():
     return "Applocation 1"
 
+@app.route('/test123', methods=['GET'])
+def home1():
+    return "Applocation 1.1"
 
 if __name__ == "__main__":
 	app.run()
