@@ -1,20 +1,15 @@
-FROM golang:alpine AS builder
-
-# RUN apk update && apk upgrade && \
-#     apk add --no-cache bash git openssh
-
-WORKDIR /
-COPY . .
-RUN GO111MODULE=auto go get -d
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=auto go build -o /go/bin/main
-
-
-FROM scratch
-
-
-COPY --from=builder /go/bin/main /
-COPY --from=builder /static/index.html /static/index.html
-COPY --from=builder /static/index.css /static/index.css
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-
-CMD ["/main"]
+FROM python:3-alpine
+RUN apk add --virtual .build-dependencies \
+            --no-cache \
+            python3-dev \
+            build-base \
+            linux-headers \
+            pcre-dev
+RUN apk add --no-cache pcre
+WORKDIR /app
+COPY /app /app
+COPY ./requirements.txt /app
+RUN pip install -r /app/requirements.txt
+RUN apk del .build-dependencies && rm -rf /var/cache/apk/*
+EXPOSE 5000
+CMD ["uwsgi", "--ini", "/app/wsgi.ini"]
