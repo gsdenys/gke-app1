@@ -12,6 +12,7 @@ import (
 
 func setupRoutes() {
 	http.Handle("/", http.FileServer(http.Dir("./static")))
+	http.Handle("/test123", http.FileServer(http.Dir("./static")))
 }
 
 func main() {
