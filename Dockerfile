@@ -13,7 +13,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=auto go build -o /go/bin/m
 FROM scratch
 
 COPY --from=builder /go/bin/main /
-COPY --from=builder /templates /
+COPY --from=builder /templates/ /templates
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 CMD ["/main"]
