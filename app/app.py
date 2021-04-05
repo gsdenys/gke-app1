@@ -9,7 +9,15 @@ def health():
 
 @app.route('/app1', methods=['GET'])
 def home():
-    return "<h1>Applocation 1!</h1>"
+    file = open('templates/index.html',mode='r')
+ 
+    # read all lines at once
+    all_of_it = file.read()
+ 
+    # close the file
+    file.close()
+
+    return all_of_it #"<h1>Applocation 1!</h1>"
 
 if __name__ == "__main__":
 	app.run()
